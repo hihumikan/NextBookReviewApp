@@ -9,10 +9,16 @@ export default NextAuth({
       authorizationUrl:
         "https://accounts.google.com/o/oauth2/v2/auth?prompt=consent&access_type=offline&response_type=code",
     }),
+    Providers.GitHub({
+      clientId: process.env.GITHUB_ID,
+      clientSecret: process.env.GITHUB_SECRET,
+      scope: "read:user",
+    }),
   ],
   jwt: {
     encryption: true,
   },
+  theme: "auto",
   secret: process.env.SECRET,
   callbacks: {
     async jwt(token, account) {
